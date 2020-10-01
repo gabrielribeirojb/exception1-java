@@ -1,4 +1,4 @@
-        package application;
+package application;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,21 +37,11 @@ public class Program {
 			System.out.print("Check-out date: (dd/MM/yyyy): ");
 			checkOut = sdf.parse(dado.nextLine());
 
-			Date now = new Date();
-
-			if (checkIn.before(now) || checkOut.before(now)) {
-				System.out.println("Error in reservation: Reservation dates for update must be future dates");
-			}
-
-			else if (!checkOut.after(checkIn)) {
-				System.out.println("Error in reservation: Check-out date must be after check-in date");
-			}
-
-			else {
-
-				reservation.updateDate(checkIn, checkOut);
+			String error = reservation.updateDate(checkIn, checkOut);
+			if (error != null) {
+				System.out.println("Error in reservation: " + error);
+			} else {
 				System.out.println("Reservation: " + reservation);
-
 			}
 		}
 
@@ -60,7 +50,3 @@ public class Program {
 	}
 
 }
-
-    
-
-    
